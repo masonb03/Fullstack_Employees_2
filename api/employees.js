@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import { createEmployee, getEmployee, getEmployees, deleteEmployee, updateEmployee } from "#db/queries/employees";
+import { createEmployee, getEmployee, deleteEmployee, updateEmployee } from "#db/queries/employees";
 
 router.route("/").get(async(req, res)=>{
     const employees = await getEmployee();
