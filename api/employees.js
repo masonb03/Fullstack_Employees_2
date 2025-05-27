@@ -2,15 +2,15 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import { createEmployee, getEmployee, deleteEmployee, updateEmployee } from "#db/queries/employees";
+import { createEmployee, getEmployee, getEmployees, deleteEmployee, updateEmployee } from "#db/queries/employees";
 
 router.route("/").get(async(req, res)=>{
-    const employees = await getEmployee();
+    const employees = await getEmployees();
     res.send(employees);
 });
 
 router.route("/").post(async(req, res) =>{
-    if(req.body){
+    if(!req.body){
         return res.status(400).send({error: "Missing req.body"})
     }
 
@@ -44,7 +44,7 @@ router.route("/:id").delete(async(req,res) =>{
     }
     const deletes = await deleteEmployee(id)
 
-    if(!deletes){
+    if(!deletes || deletes.length === 0){
         res.status(404).send({error: "Employee not found"})
     }
     res.sendStatus(204)

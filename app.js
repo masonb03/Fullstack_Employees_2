@@ -5,7 +5,7 @@ import employeeRouter from "./api/employees.js"
 
 app.use(express.json())
 
-app.use("/employyes", employeeRouter)
+app.use("/employees", employeeRouter)
 
 app.get('/', (req, res) =>{
     res.send('Welcome to the Fullstack Employees API.');
